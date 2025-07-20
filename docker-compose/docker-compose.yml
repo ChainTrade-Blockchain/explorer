@@ -18,6 +18,10 @@ services:
     extends:
       file: ./services/db.yml
       service: db
+    environment:
+      POSTGRES_USER: blockscout
+      POSTGRES_PASSWORD: ceWb1MeLBEeOIfk65gU8EjF8
+      POSTGRES_DB: blockscout
 
   backend:
     depends_on:
@@ -34,10 +38,22 @@ services:
     links:
       - db:database
     environment:
-        ETHEREUM_JSONRPC_HTTP_URL: http://host.docker.internal:8545/
-        ETHEREUM_JSONRPC_TRACE_URL: http://host.docker.internal:8545/
-        ETHEREUM_JSONRPC_WS_URL: ws://host.docker.internal:8545/
-        CHAIN_ID: '1337'
+        ETHEREUM_JSONRPC_VARIANT: geth
+        ETHEREUM_JSONRPC_HTTP_URL: http://host.docker.internal:8545
+        ETHEREUM_JSONRPC_TRACE_URL: http://host.docker.internal:8545
+        ETHEREUM_JSONRPC_WS_URL: ws://host.docker.internal:8546
+        DATABASE_URL: postgresql://postgres:BH^."il.H{r4kh0/@34.172.209.76:5432/postgres
+        COIN: achaintrade
+        COIN_NAME: achaintrade
+        COIN_SYMBOL: CHTR
+        CHAIN_ID: '306090'
+        CHAIN_TYPE: ethereum
+        FIRST_BLOCK: '1'
+        LOGO: https://www.chaintrade.network/main-2.png
+        NETWORK: chaintrade-testnet
+        SECRET_KEY_BASE: 56NtB48ear7+wMSf0IQuWDAAazhpb31qyc7GiyspBP2vh7t5zlCsF5QDv76chXeN
+        PORT: 4000
+        ETHEREUM_JSONRPC_TRANSPORT: http
 
   nft_media_handler:
     depends_on:
